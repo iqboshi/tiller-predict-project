@@ -1,7 +1,10 @@
 import numpy as np
+import torch
+
+
 def Fun_Spectral_Correction(T, p, q, h, index, sort_order, m, n, device):
     ga = []
-    t = 0
+    t = 1
     while t <= T:
         if t <= p * T:
             a = 0
@@ -14,7 +17,7 @@ def Fun_Spectral_Correction(T, p, q, h, index, sort_order, m, n, device):
             ga.append(a)
         t += 1
 
-    fa = 1 + np.array(ga)
+    fa = 1 + torch.tensor(ga, device=device)
     Fa = fa[sort_order]  # 排序
     Fa = Fa[index]  # 索引
     Fa = Fa.reshape(m, n)  # 重塑形状
